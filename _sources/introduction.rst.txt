@@ -1,0 +1,83 @@
+About RGBA Transfer
+###################
+
+RGBA Transfer is an addon that allows to bake, edit and transfer RGBA channels.
+It has a wrapper around the native Blender baking function which extends existing functionality.
+It adds operators to edit the color and the alpha channels of images and mesh color attributes.
+
+
+.. |introduction_A| image:: /images/introduction_A.webp
+
+.. |introduction_B| image:: /images/introduction_B.webp
+
+.. |introduction_C| image:: /images/introduction_C.webp
+
++------------------+----------------------------------------------------------------------------------+
+| |introduction_A| | Baking from a high poly source mesh object to a target low poly mesh object      |
++------------------+----------------------------------------------------------------------------------+
+| |introduction_B| | Baking an image with alpha to a target mesh object base color image texture      |
++------------------+----------------------------------------------------------------------------------+
+| |introduction_C| | Baking from a source mesh object to a target mesh object with different topology |
++------------------+----------------------------------------------------------------------------------+
+| These animated images are accelerated.                                                              |
++-----------------------------------------------------------------------------------------------------+
+
+Purpose
+=======
+
+RGBA Transfer covers multiple uses:
+
+- images, mesh color attributes or vertex colors baking
+- transferring color and alpha channels of images or mesh color attributes from a source to a target
+- baking PBR maps
+
+What is baking?
+===============
+
+RGBA Bake relies on baking to transfer image or mesh color attributes.
+This is a general simplified explanation of baking.
+The process of baking means that texture and lighting information is pre-computed and stored as static data.
+
+It can be used to:
+
+- export procedural maps outside authoring software (Blender or others) as static data
+- store the result of a computationally expensive shader as static data
+- capture topology details such as normals, curvature in a map
+
+The baking is performed by casting rays from an object to a target. It retrieves information thanks to these rays and reconstruct the data.
+
+
+Practical use cases
+===================
+
+.. topic:: Example A:
+    Transfer image A in mesh object A from UV map A to UV map B
+
+    .. figure:: /images/practical_example_a.png
+        :align: center
+
+        There are changes made to a UV map but there is already paint work on the model
+
+.. topic:: Example B:
+    Transfer image A from mesh object A to mesh object B
+
+    .. figure:: /images/practical_example_b.png
+        :align: center
+
+        There are changes made to the topology but there is already paint work on the model
+        
+    .. note::
+        - Mesh object A is a copy of mesh object B made before the topology changes are made to mesh object B
+        - Mesh object A and mesh object B have a similar shape but may have different topology
+        - If mesh object A and mesh object B have a lot of overlapping geometry, it can be useful to increase the :ref:`Cage Extrusion <transfer_list/transfer_entry_settings:Object Bake Settings>` value with small amount
+
+.. topic:: Example C:
+    Transfer image color and alpha channels
+
+    Transfer color and alpha channels of transparent image textures
+
+    .. note::
+        - The order of layering depends on the order of the transfer entries in the transfer list.
+
+.. note::
+    - Transferring multiple maps such as the base color, the roughness and the normals is a setup that is quite involved because it requires to create a :ref:`transfer entry <transfer_list/transfer_entry:Transfer Entry>` for each map.

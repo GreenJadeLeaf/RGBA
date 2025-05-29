@@ -1,0 +1,19 @@
+Premultiply RGB with Alpha
+##########################
+
+The operator *Premultiply RGB with Alpha* can edit the color channels of images or mesh color attributes.
+It can multiply or unmultiply the color channels with the alpha channel.
+
+.. figure:: /images/premultiply_rgb_with_alpha.png
+
+.. admonition:: Usage:
+    
+    - Execute the operator *Premultiply RGB with Alpha*
+    - Select the mode
+    - Select Premultiply or Unpremultiply
+    - Select the image or mesh color attributes
+    - Launch the operator *Premultiply RGB with Alpha*
+
+.. note::
+    - It does not edit the alpha channel.
+    - Any color associated with 0.0 alpha cannot be unpremultiplied. In different words, assuming the alpha channel represents transparency, any color that is fully transparent will be set to 0.0 and cannot be set to its initial value when unpremultiplying color with alpha.

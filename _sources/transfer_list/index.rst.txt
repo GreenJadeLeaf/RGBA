@@ -1,0 +1,17 @@
+Transfer List
+#############
+
+The operator RGBA Bake uses a list called a transfer list to process bakes.
+
+It is possible to save multiple bake setups in this list with a list entry.
+
+A list entry is called a transfer entry.
+
+.. toctree::
+   :maxdepth: 2
+   
+   transfer_entry.rst
+   transfer_entry_settings.rst
+   source_material_modes.rst
+   target_transfer_color_and_transfer_alpha.rst
+   preview_material.rst

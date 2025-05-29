@@ -1,0 +1,73 @@
+Preferences
+###########
+
+Bake Settings
+=============
+
+Default Color Attribute Data Type
+    Default color attribute data type created when the provided target color attribute name does not exist.
+
+Default Color Attribute Domain
+    Default color attribute domain created when the provided target color attribute name does not exist.
+
+Save RGBA Settings
+==================
+
+Do Clear RGBA Unique Reference
+    Ensure that the option Do Clear RGBA is only executed once for each target reference in the transfer list.
+
+Image Map Identifiers List
+==========================
+
+List containing all image map identifiers used in functions.
+
+Subprocess Settings
+===================
+
+Use Subprocessing
+    Use subprocessing to process bakes in parallel.
+
+Subprocess Timeout
+    Amount of time in seconds before aborting a process.
+
+Subprocess Max Count
+    Maximum amount of subprocesses.
+
+Subprocess Max Attempts
+    Maximum amount of attempts before aborting a process.
+
+Advanced Settings
+=================
+
+Hide Icon Previews
+    Hide icon previews of images and materials in transfer list.
+
+Save Properties
+    Save transfer list properties persistently in Blender.
+
+Modal Timer
+    The approximate amount of time in seconds between operator updates but it can be influenced by other modal timers created by other tools.
+
+Show interface in view 3D
+    Show interface in view 3D.
+    
+Show interface in node editor
+    Show interface in node editor.
+
+Show interface in properties
+    Show interface in properties.
+
+Show interface in node editor context menu
+    Show interface for convenience operators in node editor context menu.
+
+Show interface image template in transfer list
+    Show interface image common operators in transfer list.
+
+Set image data block in Image Editor
+    Set image data block in Image Editor when changing image in transfer list.
+
+Set UV map in mesh object
+    Set UV map in mesh object when changing UV map in transfer list.
+
+Set color attribute in mesh object
+    Set color attribute in mesh object when changing color attribute in transfer list.

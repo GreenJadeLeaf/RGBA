@@ -1,0 +1,45 @@
+Transfer Entry
+##############
+
+.. figure:: /images/transfer_entry.png
+    
+    A transfer entry
+
+A transfer entry has 3 sections:
+
+- The source which is on the left. It contains the source material mode used to setup the bake.
+- The target which is on the right. It contains the target object and the target image or color attribute name and the option to transfer color and alpha.
+- The settings are shown when the gear icon on the right is pressed. It contains multiple settings to adjust the bake.
+
+A transfer entry have the following properties:
+
+- An arrow in top-left corner to expand or hide the transfer entry
+- A label which can be edited on the top-left corner
+- A selected state on the right
+
+All selected transfer entries will be processed.
+
+Transfer mode
+=============
+
+The transfer mode is a shortcut to access the :ref:`Object Bake Settings Use Selected to Active <transfer_list/transfer_entry_settings:Object Bake Settings>` property.
+
+Target mode
+===========
+
+The target mode can be changed in the :ref:`Object Bake Settings <transfer_list/transfer_entry_settings:Object Bake Settings>`.
+
+There are 2 target modes:
+
+Images Textures
+    The source will be baked in each target material subentry which can have a unique target image or share a target image
+
+Color Attribute
+    The source will be baked in a color attribute
+
+.. note::
+    - Changing the source or target objects and adding or removing materials to a mesh object will clear all source and target options related to the mesh object registered in the transfer list. It is advised to create the necessary materials before creating a transfer entry in the transfer list.
+    - Each source material subentry must have a defined source material mode.
+    - If the target mode is *Images Textures*, the target material subentries can have no target images but at least a single target material subentry must have a target image.
+    - If there are multiple target image slots in a transfer entry, a global target image slot will be shown and can be used to assign multiple target image slots with the same target image.
+    - If there are unsaved changes in an image, the color space or alpha mode cannot be changed.

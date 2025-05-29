@@ -1,0 +1,35 @@
+Notes
+#####
+
+UDIM images
+    - UDIM images should be continuous in order.
+    
+    .. warning::
+        UDIM tiles should not start at tile number 1001 and continue to tile number 1003 without going to tile number 1002.
+    
+    - All UDIM image tiles must be initialized. See :ref:`Uninitialized image data block <Uninitialized image data block>`.
+
+    - Processing UDIM image tiles will write data to disk because of an API limitation in Blender.
+
+    - All UDIM image tiles will be processed each as an image data block.
+
+    .. note::
+        3 UDIM tiles equals to 3 image data blocks. It must be considered when baking multiple UDIM images because it will process more images.
+
+Image data block
+    - _`Uninitialized image data block`
+        - Uninitialized image data blocks are images that have no pixels data and cannot be painted.
+        - An uninitialized image data block cannot be saved to disk or packed in the Blender file.
+        - When an image saved to disk is reloaded while the source file path of this image does not exist, the image will not load, will be uninitialized and will show 'Cannot load image' in the side bar of the Image Editor.
+
+Render state
+    - The baking uses the render state of a mesh object to render. It means that the mesh object is evaluated after all modifiers that influence the render are applied.
+
+Channel packing
+    - It is recommended to use the Non-Color color space mode to accurately view the color channels and alpha channel in the Image Editor.
+
+Image Editor
+    - The Image Editor may not update immediately with changes made to color and alpha channels. Changing the channels display may update the Image Editor.
+
+Transfer List
+    - The transfer list may have a transfer entry which is too long. Minimizing the transfer entry can improve the navigation of the transfer list.

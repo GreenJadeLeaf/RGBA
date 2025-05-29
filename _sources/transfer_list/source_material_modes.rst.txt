@@ -1,0 +1,96 @@
+Source Material Modes
+#####################
+
+A source material mode is a way to setup the bake source.
+
+There are multiple source material modes:
+
+- Image data block and UV map name
+- Color attribute name
+- Shader node tree
+- Color
+- Material
+- Principled BSDF
+
+Each material mode provide two outputs:
+
+- the Color output
+- the Alpha output
+
+These two outputs have the Color type and Float type most of the time but in some modes, they can have a Shader type.
+
+.. note::
+    - The source color output and source alpha output are only used when their :ref:`transfer option <transfer_list/target_transfer_color_and_transfer_alpha:Target Transfer Color And Transfer Alpha>` is enabled.
+    - Most of the source material modes are only available with the *Emit* bake type.
+    - The source material modes *Shader node tree* and *Material* are always available.
+    
+Image data block and UV map name
+================================
+
+.. figure:: /images/transfer_entry_source_material_mode_image_and_uv_map_name.png
+
+- Create shader nodes to bake the image source color and alpha with the UV map name.
+- The source image color channels will be used to bake to the target color channels.
+- The source image alpha channel will be used to bake to the target alpha channel.
+
+.. note::
+    The image alpha mode will be set to *Channel Packed* in an image copy to allow proper color channels baking.
+
+Color Attribute Name
+====================
+
+.. figure:: /images/transfer_entry_source_material_mode_color_attribute_name.png
+
+- Create shader nodes to bake the mesh color attribute.
+- The source color attribute color channels will be used to bake to the target color channels.
+- The source color attribute alpha channel will be used to bake to the target alpha channel.
+
+Shader node tree
+================
+
+.. figure:: /images/transfer_entry_source_material_mode_shader_node_tree.png
+
+- Create shader nodes to bake the shader node tree in a shader node group.
+- The source output color channels can be customized to any type of sockets or to a uniform color.
+- The source output alpha channel can be customized to any type of sockets or to a uniform color.
+
+.. tip::
+    It can be used to create a custom bake setup with a Geometry Pointiness or Object Info Random shader node.
+.. note::
+    - If there is no transparency involved, the alpha should output a value of 1.0 or the :ref:`Do Transfer Alpha <transfer_list/target_transfer_color_and_transfer_alpha:Target transfer color and transfer alpha>` must be disabled in the target options in the transfer entry.
+    - If the color output is color information and the alpha output is transparency information and both outputs are produced with image textures shader nodes in the shader node group and are not Shader sockets, the option Do Unassociate Color and Alpha allows to unassociate the color output and the alpha output.
+    - If the shader node group output names change, the output names in the transfer list have to be manually updated.
+.. warning::
+    The option Do Unassociate Color and Alpha may produce inaccurate color channels output with images that has a color depth of 8 bits per channel.
+    The colors values are replaced with 0.0 when the alpha values are around 0.0.
+    It means that the pixels with almost full transparency have their RGB values replaced with 0.0.
+    In practice, there is a negligible visual difference which is difficult to see but **there is a difference in data values**, so it is advised to not consecutively bake the same image as the source and the target multiple times if the image has a color depth of 8 bits per channel.
+    This difference is not perceptible with images that has a color depth of 16 bits per channel.
+    This is due to the way Cycles handles the color data with alpha data and the amount of precision possible with images that has a color depth of 8 bits per channel.
+
+Color
+=====
+
+.. figure:: /images/transfer_entry_source_material_mode_color.png
+
+- Create shader nodes to bake the uniform color and alpha.
+- The source color channels will be used to bake to the target color channels.
+- The source alpha channel will be used to bake to the target alpha channel.
+
+Material
+========
+
+.. figure:: /images/transfer_entry_source_material_mode_material.png
+
+- The source color channels containing the result of the material will be used without using created shader nodes to bake to the target color channels.
+- The source alpha channel will use a value of 1.0 to bake to the target alpha channel.
+
+
+Principled BSDF
+===============
+
+.. figure:: /images/transfer_entry_source_material_mode_principled_bsdf.png
+    
+- Create shader node links to reroute all principled BSDF shader nodes with the specified input including shader node groups to the active material output shader node input surface.
+- The source color channels containing the result of the principled BSDF shader nodes will be used to bake to the target color channels.
+- The source alpha channel will use a value of 1.0 to bake to the target alpha channel.

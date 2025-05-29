@@ -1,0 +1,104 @@
+Transfer Entry Settings
+#######################
+
+This section covers the multiple ways to customize a bake in a transfer entry.
+
+.. figure:: /images/transfer_entry_settings.png
+    
+    Transfer Entry Settings
+
+Object Bake Settings
+====================
+
+.. figure:: /images/transfer_entry_settings_object_bake_settings.png
+
+Most of the settings are identical to the native settings in Blender. See the official Blender documentation `Blender Render Cycles Baking <https://docs.blender.org/manual/en/latest/render/cycles/baking.html>`_.
+
+.. note::
+    The settings override the current scene render bake settings temporarily. These settings should be reverted back to their current values after the execution of the :ref:`RGBA Bake operator <operator_rgba_bake>`.
+
+Draw Mask Settings
+==================
+
+.. figure:: /images/transfer_entry_settings_draw_mask_settings.png
+
+The option Draw Mask allows the bake to be applied only on a part of the target mesh object by using either an image or a color attribute.
+The source mode can either be an image or a color attribute.
+The source can be previewed with the :ref:`Preview Material <transfer_list/preview_material:Preview Material>` operator.
+
+.. note::
+    - Most of the target options are overriden with the current bake target options and are shown for information only and not designed to be editable directly. To change them, change the target options of the current transfer entry.
+    - The mask should be grayscale since the red channel of the mask is used and the other channels are ignored.
+
+Save RGBA Settings
+==================
+
+.. figure:: /images/transfer_entry_settings_save_rgba_settings.png
+
+The Save RGBA settings allow to customize how the data is saved.
+
+Do Alpha Blend
+    If Do Alpha Blend is enabled, the previous RGBA information is considered, otherwise it is replaced completely or replaced with a mask applied if the :ref:`Draw Mask <transfer_list/transfer_entry_settings:Draw Mask Settings>` option is enabled.
+    When the previous RGBA information is considered, it includes the data from the previous bake if multiple bakes are executed consecutively for the same target image or color attribute.
+    The data before any bake is performed can be included if *Do Clear RGBA* is not enabled.
+
+Alpha Blend Mode
+    The option Alpha Blend Mode blends the result RGBA information with the previous RGBA information with either Straight Alpha or Premultiplied Alpha.
+
+.. note::
+    *Do Alpha Blend* may be used in cases when baking consecutively the same target to layer multiple bake results with transparency.
+
+Do Clear RGBA
+    The option Do Clear RGBA allows to clear RGBA information before the save is performed.
+
+Do Clear RGBA Color
+    The option Do Clear RGBA Color allows to set the color and the alpha values before the save is performed.
+
+Do Clear RGBA Color with Mask
+    The option Do Clear RGBA Color with Mask allows to set the color and the alpha values with the masks in *Draw Mask Settings* and *Use Bake Mask* before the save is performed.
+
+.. note::
+    It is advised to not use the option *Do Clear RGBA* for multiple transfer entries using the same target image data block or color attribute name otherwise all previous results are discarded and are replaced with the generated color and alpha.
+    The option :ref:`Do Clear RGBA Unique Reference <preferences:Save RGBA Settings>` prevent clearing multiple times the same target in the transfer list.
+
+Do Premultiply Color with Alpha
+    Premultiply the color channels with the alpha channel.
+
+Do Create UV map shader node
+    Create a UV map shader node when the :ref:`Object Bake Settings Target is Images Textures <transfer_list/transfer_entry_settings:Object Bake Settings>` in the target material.
+
+Do Create UV map shader node in shader node groups
+    Create a UV map shader node when the :ref:`Object Bake Settings Target is Images Textures <transfer_list/transfer_entry_settings:Object Bake Settings>` in the target material including shader node groups.
+
+Use Bake Mask
+    Use the bake mask stored in the alpha channel which is generated with Cycles.
+
+Do Replace Color
+    Replace the target color channels.
+    If there are no available color channels provided with the option :ref:`Transfer Color <transfer_list/target_transfer_color_and_transfer_alpha:Target Transfer Color And Transfer Alpha>`, it will use the default values in *Do Replace Default RGBA Color*.
+
+Do Replace Alpha
+    Replace the target alpha channel.
+    If there is no available alpha channel provided with the option :ref:`Transfer Alpha <transfer_list/target_transfer_color_and_transfer_alpha:Target Transfer Color And Transfer Alpha>`, it will use the default values in *Do Replace Default RGBA Color*.
+
+Do Replace Default RGBA Color
+    Default RGBA Color when there are no available channels.
+
+Scene Render Cycles Settings
+============================
+
+.. figure:: /images/transfer_entry_settings_scene_render_cycles_settings.png
+
+Most of the settings are identical to the native settings in Blender. See the official Blender documentation `Blender Render Cycles Sampling <https://docs.blender.org/manual/en/latest/render/cycles/render_settings/sampling.html>`_.
+
+.. note::
+    The settings override the current scene render cycles sampling settings temporarily. These settings should be reverted back to their current values after the execution of the :ref:`RGBA Bake operator <operator_rgba_bake>`.
+
+Custom Settings
+===============
+
+.. figure:: /images/transfer_entry_settings_custom_settings.png
+
+Override Principled BSDF Metallic Input
+    When the :ref:`Object Bake Settings Type is Diffuse <transfer_list/transfer_entry_settings:Object Bake Settings>`, this option allows to add a shader node with 0.0 value in the metallic input of each principled BSDF shader node.
+    When baking the diffuse color to use with a metallic map, white outlines are visible where the metallic map values are either not fully 0.0 or 1.0 or interpolated between pixels with 0.0 and 1.0 values.
